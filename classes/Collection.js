@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const fsPromises = require('fs/promises');
 
 class Collection {
@@ -10,6 +11,16 @@ class Collection {
 
     get id() {
         return this._id++;
+    }
+
+    setStartId() {
+        const data = fs.readFileSync(this.filePath);
+        const dataArr = JSON.parse(data.toString());
+
+        if (dataArr.length) {
+            dataArr.sort((a, b) => b.id - a.id);
+            this._id = dataArr[0].id + 1;
+        }
     }
 
     async _getData() {
@@ -33,7 +44,7 @@ class Collection {
     async selectById(id) {
         const dataArr = await this._getData();
 
-        return dataArr.find(item => item.id === id);
+        return dataArr.find(item => item.id === +id);
     }
 
     async insert(dataObject) {
@@ -42,7 +53,6 @@ class Collection {
         const dataObjectWithId = {...dataObject, id: this.id};
 
         dataArr.push(dataObjectWithId);
-
         await this._setData(dataArr);
 
         return {...dataObjectWithId};
@@ -51,9 +61,10 @@ class Collection {
     async updateById(id, propertyDataObject) {
         const dataArr = await this._getData();
 
-        const dataObjectForUpdate = dataArr.find(item => item.id === id);
-
+        const dataObjectForUpdate = dataArr.find(item => item.id === +id);
         Object.assign(dataObjectForUpdate, propertyDataObject);
+
+        await this._setData(dataArr);
 
         return {...dataObjectForUpdate};
     }
@@ -61,7 +72,7 @@ class Collection {
     async deleteById(id) {
         const dataArr = await this._getData();
 
-        const newDataArr = dataArr.filter(item => item.id !== id);
+        const newDataArr = dataArr.filter(item => item.id !== +id);
 
         await this._setData(newDataArr);
 

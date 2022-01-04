@@ -5,6 +5,8 @@ module.exports = async () => {
     const notes = await noteCollection.selectAll();
 
     if (!notes.length) {
-        startDataNotes.forEach(note => noteCollection.insert(note));
+        for(let i = 0; i < startDataNotes.length; ++i) {
+            await noteCollection.insert(startDataNotes[i]);
+        }
     }
 };

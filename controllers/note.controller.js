@@ -3,7 +3,7 @@ const {errorStatuses} = require('../constants');
 const {noteService} = require('../services');
 
 module.exports = {
-    getAllNotes: async (res, req, next) => {
+    getAllNotes: async (req, res, next) => {
         try {
             const notes = await noteCollection.selectAll();
 
@@ -13,7 +13,7 @@ module.exports = {
         }
     },
 
-    getNoteStats: async (res, req, next) => {
+    getNoteStats: async (req, res, next) => {
         try {
             const noteStats = await noteService.getNoteStats();
 
@@ -23,19 +23,19 @@ module.exports = {
         }
     },
 
-    getNoteById: (res, req, next) => {
+    getNoteById: (req, res, next) => {
         try {
-            const {foundNote} = res;
+            const {foundNote} = req;
 
-            req.json(foundNote);
+            res.json(foundNote);
         } catch (err) {
             next(err);
         }
     },
 
-    createNote: async (res, req, next) => {
+    createNote: async (req, res, next) => {
         try {
-            const {body} = res;
+            const {body} = req;
 
             const createdNote = await noteCollection.insert(body);
 
@@ -47,12 +47,12 @@ module.exports = {
         }
     },
 
-    updateNote: async (res, req, next) => {
+    updateNote: async (req, res, next) => {
         try {
             const {
                 params: {id},
                 body
-            } = res;
+            } = req;
 
             const updatedNote = await noteCollection.updateById(id, body);
 
@@ -64,9 +64,9 @@ module.exports = {
         }
     },
 
-    deleteNote: async (res, req, next) => {
+    deleteNote: async (req, res, next) => {
         try {
-            const {params: {id}} = res;
+            const {params: {id}} = req;
 
             await noteCollection.deleteById(id);
 

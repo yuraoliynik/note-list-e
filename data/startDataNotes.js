@@ -1,5 +1,5 @@
 const {noteCategoryNames} = require('../constants');
-const {Note} = require('../classes');
+const Note = require('../classes/Note');
 
 module.exports = [
     new Note(
@@ -16,12 +16,12 @@ module.exports = [
         ''
     ),
 
-    // new Note(
-    //     'The theory of evolution',
-    //     '2021-05-05',
-    //     noteCategoryNames.RANDOM_THOUGHT,
-    //     'I’m gonna have a dentist appointment on the 3/5/2021, I moved it from 5/5/2021'
-    // ),
+    new Note(
+        'The theory of evolution',
+        '2021-05-05',
+        noteCategoryNames.RANDOM_THOUGHT,
+        'I’m gonna have a dentist appointment on the 3/5/2021, I moved it from 5/5/2021'
+    ),
 
     new Note(
         'William Gaddis',

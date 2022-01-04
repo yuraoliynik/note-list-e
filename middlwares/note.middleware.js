@@ -5,9 +5,9 @@ const {
 } = require('../constants');
 
 module.exports = {
-    isIdExist: async (res, req, next) => {
+    isIdExist: async (req, res, next) => {
         try {
-            const {params: id} = res;
+            const {params: {id}} = req;
 
             const foundNote = await noteCollection.selectById(id);
 
@@ -20,7 +20,7 @@ module.exports = {
                 );
             }
 
-            res.foundNote = foundNote;
+            req.foundNote = foundNote;
 
             next();
         } catch (err) {

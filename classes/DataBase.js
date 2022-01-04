@@ -12,7 +12,13 @@ class DataBase {
 
         const startData = JSON.stringify([]);
 
-        fs.writeFileSync(newCollection.filePath, startData);
+        const isFileExist = fs.existsSync(newCollection.filePath);
+
+        if (!isFileExist) {
+            fs.writeFileSync(newCollection.filePath, startData);
+        }
+
+        newCollection.setStartId();
 
         this[collectionName] = newCollection;
 
