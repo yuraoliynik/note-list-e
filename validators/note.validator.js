@@ -1,23 +1,45 @@
-const {object, string, date} = require ('yup');
+const yup = require('yup');
 
 const {noteCategoryNames} = require('../constants');
 
-const noteValidator = object({
-    name: string()
-        .trim()
-        .required(),
+const name = yup
+    .string()
+    .trim();
 
-    created: date()
-        .default(() => new Date())
-        .required(),
+const created = yup
+    .date();
 
-    category: string()
-        .enum(Object.values(noteCategoryNames))
-        .required(),
+const category = yup
+    .string()
+    .oneOf(Object.values(noteCategoryNames));
 
-    content: string()
-        .default('')
+const content = yup
+    .string();
+
+const archive = yup
+    .number()
+    .oneOf([
+        0,
+        1
+    ]);
+
+const noteCreateValidator = yup.object({
+    name,
+    created: created.required(),
+    category: category.required(),
+    content: content.default(''),
+    archive: archive.default(0)
 });
 
-module.exports = noteValidator;
+const noteUpdateValidator = yup.object({
+    name,
+    created,
+    category,
+    content,
+    archive
+});
 
+module.exports = {
+    noteCreateValidator,
+    noteUpdateValidator
+};

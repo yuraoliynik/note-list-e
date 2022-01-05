@@ -1,7 +1,11 @@
 const router = require('express').Router();
 
 const noteController = require('../controllers/note.controller');
-const noteMiddleware = require('../middlwares/note.middleware');
+const {noteMiddleware, validMiddleware} = require('../middlwares');
+const {
+    noteCreateValidator,
+    noteUpdateValidator
+} = require('../validators/note.validator');
 
 router.get(
     '',
@@ -9,6 +13,7 @@ router.get(
 );
 router.post(
     '',
+    validMiddleware.isBodyValidate(noteCreateValidator),
     noteController.createNote
 );
 
@@ -25,6 +30,7 @@ router.get(
 
 router.patch(
     '/:id',
+    validMiddleware.isBodyValidate(noteUpdateValidator),
     noteMiddleware.isIdExist,
     noteController.updateNote
 );
@@ -33,6 +39,5 @@ router.delete(
     noteMiddleware.isIdExist,
     noteController.deleteNote
 );
-
 
 module.exports = router;

@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "683b39a4-d3c1-45bb-ae4c-2bb6235241dd",
+		"name": "note-list",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all notes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_host}}/notes",
+					"host": [
+						"{{api_host}}"
+					],
+					"path": [
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get note by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_host}}/notes/1",
+					"host": [
+						"{{api_host}}"
+					],
+					"path": [
+						"notes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create note",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"name\": \"Shopping list\",\r\n    \"created\": \"2021-04-20\",\r\n    \"category\": \"Task\",\r\n    \"content\": \"\",\r\n    \"archive\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_host}}/notes",
+					"host": [
+						"{{api_host}}"
+					],
+					"path": [
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get note stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_host}}/notes/stats",
+					"host": [
+						"{{api_host}}"
+					],
+					"path": [
+						"notes",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete note  by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{api_host}}/notes/4",
+					"host": [
+						"{{api_host}}"
+					],
+					"path": [
+						"notes",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit note",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"name\": \"Shopping list\",\r\n    \"created\": \"2021-04-20\",\r\n    \"category\": \"Task\",\r\n    \"content\": \"\",\r\n    \"archive\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_host}}/notes/7",
+					"host": [
+						"{{api_host}}"
+					],
+					"path": [
+						"notes",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,6 +1,6 @@
-const path = require('path');
 const fs = require('fs');
 const fsPromises = require('fs/promises');
+const path = require('path');
 
 class Collection {
     constructor(collectionPath, collectionName) {
