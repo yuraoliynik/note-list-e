@@ -24,7 +24,7 @@ const archive = yup
     ]);
 
 const noteCreateValidator = yup.object({
-    name,
+    name: name.default(''),
     created: created.required(),
     category: category.required(),
     content: content.default(''),
